@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whut.dsbs.provider.dao.MaterialDao">
+    <resultMap id="materialMap" type="com.whut.dsbs.common.dto.Material">
+        <result column="id" property="id" />
+        <result column="material_name" property="materialName" />
+        <result column="material_description" property="materialDescription" />
+        <result column="material_quoted_price" property="materialQuotedPrice" />
+        <result column="material_price" property="materialPrice" />
+        <result column="material_number" property="materialNumber" />
+    </resultMap>
+
+    <select id="selectMaterialByPage" resultMap="materialMap">
+        select * from material
+    </select>
+
+    <delete id="deleteByIdList" parameterType="java.util.List">
+        DELETE FROM material WHERE id IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="insertMaterial" parameterType="com.whut.dsbs.common.dto.Material">
+        INSERT into
+        material(material_name, material_description, material_quoted_price, material_price, material_number)
+        values
+        (#{materialName}, #{materialDescription}, #{materialQuotedPrice}, #{materialPrice}, #{materialNumber})
+    </insert>
+
+    <select id="selectById" resultMap="materialMap">
+        select * from material where id = #{id}
+    </select>
+
+    <update id="updateMaterialById" parameterType="com.whut.dsbs.common.dto.Material">
+        UPDATE
+        material
+        SET
+        material_name = #{materialName},
+        material_description = #{materialDescription},
+        material_quoted_price = #{materialQuotedPrice},
+        material_price = #{materialPrice},
+        material_number = #{materialNumber}
+        WHERE
+        id = #{id}
+    </update>
+</mapper>
