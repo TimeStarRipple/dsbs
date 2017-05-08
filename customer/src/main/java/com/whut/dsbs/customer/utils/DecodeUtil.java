@@ -10,11 +10,11 @@ import com.whut.dsbs.common.dto.User;
 public class DecodeUtil {
 
     /**
-     * 解密
+     * 解密成User
      * @param authorization
      * @return
      */
-    public static User decode(String authorization){
+    public static User decodeToObject(String authorization){
         String decodeUser = authorization.substring(6);
 
         User user = new User();
@@ -30,5 +30,15 @@ public class DecodeUtil {
             }
         }
         return user;
+    }
+
+    /**
+     * 解密成字符串
+     * @param authorization
+     * @return
+     */
+    public static String decodeToString(String authorization){
+        //目前前端直接传了解密的过来了，所以不用解密
+        return authorization;
     }
 }

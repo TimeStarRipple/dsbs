@@ -99,21 +99,28 @@ app
 // 考虑到账号更改密码，需要让他重新登录
 app.config(function ($httpProvider) {
   $httpProvider.interceptors.push('AuthInterceptor');
-})
+});
 app.factory('AuthInterceptor', function ($rootScope, $q,$location) {
   return {
     responseError: function (response) {
-      console.log(response);
-        if(response.status==401)
+        if(response.status==401 || response.status==0)
         {
             $location.url('/auth/login');
         }
       return $q.reject(response);
     }
   };
-})
+});
 
-// // 定义一个 Service ，稍等将会把它作为 Interceptors 的处理函数
+//跨域设置
+app.config(['$httpProvider', config]);  
+  
+function config($httpProvider) {  
+    $httpProvider.defaults.withCredentials = true;  
+    $httpProvider.defaults.headers.common = { 'Access-Control-Allow-Origin' : '*' }  
+} 
+  
+// 定义一个 Service ，稍等将会把它作为 Interceptors 的处理函数
 // app.factory('HttpInterceptor', ['$q', HttpInterceptor]);
 
 // function HttpInterceptor($q) {

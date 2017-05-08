@@ -1,8 +1,10 @@
+
 'use strict';
 
 app.controller('ListController', function($scope, $resource,$stateParams,$modal,$state) {
     //查询
     $scope.query = function(page,filter){
+
         var $com = $resource($scope.app.host + "/material/?page=:page&search=:filter",{page:'@page',filter:'@filter'});
         if(!page){
             page=1;
@@ -27,7 +29,13 @@ app.controller('ListController', function($scope, $resource,$stateParams,$modal,
                 data.pages.push(i)
             $scope.data = data;
             $scope.search_context = filter;
-        });
+        },function(err){
+            console.log(1111);
+            console.log(err);
+            console.log(2222);
+            // $state.go('auth.login');
+        }
+      );
     }
     //搜索跳转
     $scope.search = function(){

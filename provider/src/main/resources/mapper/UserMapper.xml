@@ -14,14 +14,14 @@
     <select id="selectById" resultMap="userMap">
         select
         <include refid="baseColumnList" />
-        from user
+        from dsbs_user
         where id = #{id}
     </select>
 
     <select id="selectByUser" resultMap="userMap">
         select
         <include refid="baseColumnList"/>
-        from user
+        from dsbs_user
         where
         username = #{username}
         and

@@ -14,6 +14,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +49,7 @@ public class UserController {
             throw new RuntimeException("请登录后再使用该系统！");
         }
 
-        User user = DecodeUtil.decode(authorization);
+        User user = DecodeUtil.decodeToObject(authorization);
 
         if(user.getUsername() == null || "".equals(user.getUsername())){
             throw new RuntimeException("账号不能为空！");
@@ -62,6 +63,9 @@ public class UserController {
         if(result == null || result.getUsername() == null){
             throw new RuntimeException("账号或密码错误！");
         }
+
+        HttpSession httpSession = request.getSession();
+        httpSession.setAttribute("user", user);
 
         return new JsonResult("200", "登录成功", result);
     }

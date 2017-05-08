@@ -4,7 +4,7 @@ app.controller('LoadingController',function($scope,$resource,$state,$localStorag
         console.log(data);
         $scope.session_user = $localStorage.user = data.object; //保存用户信息
         $state.go('app.dashboard');
-    },function(){
+    },function(err){
         $state.go('auth.login');
     })  
 });

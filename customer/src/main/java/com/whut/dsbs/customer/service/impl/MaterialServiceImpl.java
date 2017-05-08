@@ -3,7 +3,6 @@ package com.whut.dsbs.customer.service.impl;
 import com.whut.dsbs.common.dto.Material;
 import com.whut.dsbs.customer.service.MaterialService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
  * Created by zyb on 2017-04-30.
  */
 @Service("materialServiceImpl")
-@Transactional
 public class MaterialServiceImpl implements MaterialService{
 
     @Resource

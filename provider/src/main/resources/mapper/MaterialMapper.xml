@@ -11,11 +11,11 @@
     </resultMap>
 
     <select id="selectMaterialByPage" resultMap="materialMap">
-        select * from material
+        select * from dsbs_material
     </select>
 
     <delete id="deleteByIdList" parameterType="java.util.List">
-        DELETE FROM material WHERE id IN
+        DELETE FROM dsbs_material WHERE id IN
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
@@ -23,18 +23,18 @@
 
     <insert id="insertMaterial" parameterType="com.whut.dsbs.common.dto.Material">
         INSERT into
-        material(material_name, material_description, material_quoted_price, material_price, material_number)
+        dsbs_material(material_name, material_description, material_quoted_price, material_price, material_number)
         values
         (#{materialName}, #{materialDescription}, #{materialQuotedPrice}, #{materialPrice}, #{materialNumber})
     </insert>
 
     <select id="selectById" resultMap="materialMap">
-        select * from material where id = #{id}
+        select * from dsbs_material where id = #{id}
     </select>
 
     <update id="updateMaterialById" parameterType="com.whut.dsbs.common.dto.Material">
         UPDATE
-        material
+        dsbs_material
         SET
         material_name = #{materialName},
         material_description = #{materialDescription},
