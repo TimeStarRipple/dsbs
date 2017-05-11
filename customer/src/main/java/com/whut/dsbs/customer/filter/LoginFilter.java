@@ -5,7 +5,6 @@ import com.whut.dsbs.common.dto.User;
 import com.whut.dsbs.customer.constants.JsonResult;
 import com.whut.dsbs.customer.constants.ResponseMsg;
 import com.whut.dsbs.customer.utils.DecodeUtil;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,6 @@ import java.io.IOException;
  *
  * Created by zyb on 2017-04-30.
  */
-@Component
 public class LoginFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -39,11 +37,11 @@ public class LoginFilter implements Filter {
                 HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
 
                 //设置跨域
-                httpResponse.setHeader("Access-Control-Allow-Origin", httpRequest.getHeader("Origin"));
-                httpResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-                httpResponse.setHeader("Access-Control-Max-Age", "3600");
-                httpResponse.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-                httpResponse.setHeader("Access-Control-Allow-Credentials","true"); //是否支持cookie跨域
+//                httpResponse.setHeader("Access-Control-Allow-Origin", httpRequest.getHeader("Origin"));
+//                httpResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+//                httpResponse.setHeader("Access-Control-Max-Age", "3600");
+//                httpResponse.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+//                httpResponse.setHeader("Access-Control-Allow-Credentials","true"); //是否支持cookie跨域
 
                 httpResponse.setCharacterEncoding("UTF-8");
                 httpResponse.setContentType("application/json; charset=utf-8");
@@ -91,7 +89,7 @@ public class LoginFilter implements Filter {
             if ((auth != null) && (auth.length() > 6))
             {
                 String HeadStr = auth.substring(0, 5).toLowerCase();
-                if (HeadStr.compareTo("Basic") == 0)
+                if (HeadStr.compareTo("basic") == 0)
                 {
                     auth = auth.substring(6, auth.length());
                     String decodedAuth = DecodeUtil.decodeToString(auth);

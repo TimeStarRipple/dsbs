@@ -16,7 +16,7 @@ public class CustomerApplication {
 	}
 
 	@Bean
-	@Order(Integer.MAX_VALUE - 1)//数字小的先执行
+	@Order(Integer.MAX_VALUE - 1)//按顺序加载，order没用
 	public FilterRegistrationBean corsFilterRegistrationBean() {
 		FilterRegistrationBean registration = new FilterRegistrationBean(new CorsFilter());
 		registration.addUrlPatterns("/*");

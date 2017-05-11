@@ -76,18 +76,18 @@ angular.module('app')
       }
 
       //访问权限限制
-      $scope.$on('$routeChangeStart', function(scope, next, current) {  
-        console.log("test");
-        var $com = $resource($scope.app.host + "/user/login");
-        $com.get(function(data){
-          console.log(111);
-          console.log(data);
-          console.log(1111);
-          $scope.session_user = $localStorage.user = data.object; //保存用户信息
-        },function(){
-          $state.go('auth.login');
-        })
-      });
+      // $scope.$on('$routeChangeStart', function(scope, next, current) {  
+      //   console.log("test");
+      //   var $com = $resource($scope.app.host + "/user/login");
+      //   $com.get(function(data){
+      //     console.log(111);
+      //     console.log(data);
+      //     console.log(1111);
+      //     $scope.session_user = $localStorage.user = data.object; //保存用户信息
+      //   },function(){
+      //     $state.go('auth.login');
+      //   })
+      // });
 
       function isSmartDevice( $window )
       {

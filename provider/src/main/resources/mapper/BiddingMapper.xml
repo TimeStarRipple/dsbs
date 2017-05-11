@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whut.dsbs.provider.dao.BiddingDao">
+    <resultMap id="biddingMap" type="com.whut.dsbs.common.dto.Bidding">
+        <result column="id" property="id" />
+        <result column="project_name" property="projectName" />
+        <result column="create_time" property="createTime" />
+        <result column="user_id" property="userId" />
+        <result column="username" property="username" />
+        <result column="project_description" property="projectDescription" />
+        <result column="task_id" property="taskId" />
+        <result column="process_instance_id" property="processInstanceId" />
+        <result column="assignee_role_id" property="assigneeRoleId" />
+        <result column="assignee_department" property="assigneeDepartment" />
+        <result column="task_name" property="taskName" />
+        <result column="condition" property="condition" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.whut.dsbs.common.dto.Bidding">
+        insert into
+        dsbs_bidding(project_name, create_time, user_id, username, project_description,
+        task_id, process_instance_id, assignee_role_id, assignee_department, task_name, condition)
+        VALUES
+        (#{projectName}, #{createTime}, #{userId}, #{username}, #{projectDescription},
+        #{taskId}, #{processInstanceId}, #{assigneeRoleId}, #{assigneeDepartment}, #{taskName}, #{condition})
+    </insert>
+
+    <select id="selectByRoleId" resultMap="biddingMap">
+        select * from dsbs_bidding where assignee_role_id = #{roleId}
+    </select>
+</mapper>

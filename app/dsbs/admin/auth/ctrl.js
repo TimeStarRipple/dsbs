@@ -3,14 +3,20 @@ app.controller('LoadingController',function($scope,$resource,$state,$localStorag
     $com.get(function(data){
         console.log(data);
         $scope.session_user = $localStorage.user = data.object; //保存用户信息
+        //保存菜单数据
+        $scope.menu = data.object.role.permissions;
         $state.go('app.dashboard');
     },function(err){
         $state.go('auth.login');
     })  
 });
 app.controller('LoginController',function($scope,$state,$http,$resource,Base64,$localStorage){
+    $scope.menu = [];
+    
+    $scope.authError = "";
+
     $scope.login = function(){
-        $scope.authError = ""
+        
         var authdata = Base64.encode($scope.user.username + ':' + $scope.user.password);
 
         //先解密，最后再修改加密问题
@@ -22,6 +28,7 @@ app.controller('LoginController',function($scope,$state,$http,$resource,Base64,$
             console.log(data);
             $scope.session_user = $localStorage.user = data.object; //保存用户信息
             $localStorage.auth = authdata;
+
             $state.go('app.dashboard');
         },function(data){
             console.log(data);

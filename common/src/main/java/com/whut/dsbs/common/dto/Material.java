@@ -1,49 +1,56 @@
 package com.whut.dsbs.common.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 制作产品所需要的材料
  *
  * Created by zyb on 2017-04-30.
  */
-@Entity
-@Table(name = "material")
 public class Material implements Serializable{
 
-    @Id
-    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "material_name")
+    private String materialCode;
+
     private String materialName;
 
-    @Column(name = "material_description")
     private String materialDescription;
 
-    @Column(name = "material_quoted_price")
     private Double materialQuotedPrice;
 
-    @Column(name = "material_price")
     private Double materialPrice;
 
-    @Column(name = "material_number")
     private Double materialNumber;
+
+    //材料类型id
+    private int materialTypeId;
+
+    //最后一次数据更新时间
+    private Date lastUpdateTime;
+
+    //材料类型
+    private MaterialType materialType;
+
+    //材料属性
+    private Object materialAttribute;
 
     public Material() {
     }
 
-    public Material(Integer id, String materialName, String materialDescription, Double materialQuotedPrice, Double materialPrice, Double materialNumber) {
+    public Material(Integer id, String materialCode, String materialName, String materialDescription, Double materialQuotedPrice, Double materialPrice, Double materialNumber, int materialTypeId, Date lastUpdateTime, MaterialType materialType, Object materialAttribute) {
         this.id = id;
+        this.materialCode = materialCode;
         this.materialName = materialName;
         this.materialDescription = materialDescription;
         this.materialQuotedPrice = materialQuotedPrice;
         this.materialPrice = materialPrice;
         this.materialNumber = materialNumber;
+        this.materialTypeId = materialTypeId;
+        this.lastUpdateTime = lastUpdateTime;
+        this.materialType = materialType;
+        this.materialAttribute = materialAttribute;
     }
 
     public Integer getId() {
@@ -94,15 +101,60 @@ public class Material implements Serializable{
         this.materialNumber = materialNumber;
     }
 
+    public String getMaterialCode() {
+        return materialCode;
+    }
+
+    public void setMaterialCode(String materialCode) {
+        this.materialCode = materialCode;
+    }
+
+    public int getMaterialTypeId() {
+        return materialTypeId;
+    }
+
+    public void setMaterialTypeId(int materialTypeId) {
+        this.materialTypeId = materialTypeId;
+    }
+
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
+
+    public MaterialType getMaterialType() {
+        return materialType;
+    }
+
+    public void setMaterialType(MaterialType materialType) {
+        this.materialType = materialType;
+    }
+
+    public Object getMaterialAttribute() {
+        return materialAttribute;
+    }
+
+    public void setMaterialAttribute(Object materialAttribute) {
+        this.materialAttribute = materialAttribute;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Material{");
         sb.append("id=").append(id);
+        sb.append(", materialCode='").append(materialCode).append('\'');
         sb.append(", materialName='").append(materialName).append('\'');
         sb.append(", materialDescription='").append(materialDescription).append('\'');
         sb.append(", materialQuotedPrice=").append(materialQuotedPrice);
         sb.append(", materialPrice=").append(materialPrice);
         sb.append(", materialNumber=").append(materialNumber);
+        sb.append(", materialTypeId=").append(materialTypeId);
+        sb.append(", lastUpdateTime=").append(lastUpdateTime);
+        sb.append(", materialType=").append(materialType);
+        sb.append(", materialAttribute=").append(materialAttribute);
         sb.append('}');
         return sb.toString();
     }

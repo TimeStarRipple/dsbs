@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Mapper
 public interface UserDao {
-    @Select("select * from user")
+    @Select("select * from dsbs_user")
     List<User> selectAll();
 
     User selectById(@Param("id")int id);

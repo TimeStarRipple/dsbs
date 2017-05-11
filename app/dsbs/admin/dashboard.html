@@ -1,0 +1,13 @@
+<script type="text/javascript">
+	app.controller('dashboardController',function($scope,$state,$http,$resource,Base64,$localStorage){
+		
+        var $com = $resource($scope.app.host + "/user/permissions");
+		$com.get(function(data){
+            
+            $scope.menu = data.object;
+            
+        },function(err){
+            $state.go('auth.login');
+        })
+	})
+</script>

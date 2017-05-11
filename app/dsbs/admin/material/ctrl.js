@@ -26,14 +26,9 @@ app.controller('ListController', function($scope, $resource,$stateParams,$modal,
             s += 1;
             var e = Math.min(data.page_count,s+N-1)
             for(var i=s;i<=e;i++)
-                data.pages.push(i)
+                data.pages.push(i);
             $scope.data = data;
             $scope.search_context = filter;
-        },function(err){
-            console.log(1111);
-            console.log(err);
-            console.log(2222);
-            // $state.go('auth.login');
         }
       );
     }

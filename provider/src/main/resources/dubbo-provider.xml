@@ -19,9 +19,12 @@
     <!--<dubbo:annotation package="com.whut.dsbs.provider.service.impl" />-->
 
     <dubbo:service interface="com.whut.dsbs.common.service.UserService" ref="userService"/>
-    <bean id="userService" class="com.whut.dsbs.provider.service.impl.UserServiceImpl"/>
 
     <dubbo:service interface="com.whut.dsbs.common.service.MaterialService" ref="materialService"/>
-    <bean id="materialService" class="com.whut.dsbs.provider.service.impl.MaterialServiceImpl"/>
+
+    <dubbo:service interface="com.whut.dsbs.common.service.BiddingService" ref="biddingService"/>
+
+    <!--<dubbo:service interface="com.whut.dsbs.common.service.ActivitiService" ref="activitiService"/>-->
+    <!--<bean id="activitiService" class="com.whut.dsbs.provider.service.impl.ActivitiServiceImpl"/>-->
 
 </beans>

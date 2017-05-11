@@ -1,10 +1,12 @@
 package com.whut.dsbs.customer.controller;
 
+import com.whut.dsbs.common.dto.Permission;
 import com.whut.dsbs.common.dto.User;
+import com.whut.dsbs.common.service.UserService;
 import com.whut.dsbs.customer.constants.JsonResult;
-import com.whut.dsbs.customer.service.UserService;
 import com.whut.dsbs.customer.utils.DecodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,17 +29,24 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
-    @Resource
+    @Autowired
+    @Qualifier("userService")
     private UserService userServiceImpl;
-
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public User getUserById(){
-        return new User(3, "tangtang", "tangtangdemima");
-    }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public List<User> getAllUser(){
-        return userServiceImpl.getAllUser();
+        return userServiceImpl.selectAll();
+    }
+
+    @RequestMapping(value = "/permissions", method = RequestMethod.GET)
+    public JsonResult getPermissions(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        List<Permission> result = (List<Permission>) session.getAttribute("permissions");
+        if(result == null){
+            throw new RuntimeException("登录超时，请重新登录");
+        }else{
+            return new JsonResult("200", "查询权限成功", result);
+        }
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -59,13 +68,17 @@ public class UserController {
             throw new RuntimeException("密码不能为空！");
         }
 
-        User result = userServiceImpl.login(user);
+        User result = userServiceImpl.selectByUser(user);
         if(result == null || result.getUsername() == null){
             throw new RuntimeException("账号或密码错误！");
         }
 
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute("user", user);
+        httpSession.setAttribute("permissions", result.getRole().getPermissions());
+
+        //密码设置为空，返回前台
+        result.setPassword(null);
 
         return new JsonResult("200", "登录成功", result);
     }

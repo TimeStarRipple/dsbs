@@ -15,10 +15,10 @@
       <scope>test</scope>
     </dependency>
     <!--表，列，ID注解-->
-    <dependency>
-      <groupId>javax.persistence</groupId>
-      <artifactId>persistence-api</artifactId>
-      <version>1.0.2</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>javax.persistence</groupId>-->
+      <!--<artifactId>persistence-api</artifactId>-->
+      <!--<version>1.0.2</version>-->
+    <!--</dependency>-->
   </dependencies>
 </project>

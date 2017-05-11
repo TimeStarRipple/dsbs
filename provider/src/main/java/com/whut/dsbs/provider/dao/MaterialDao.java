@@ -1,7 +1,6 @@
 package com.whut.dsbs.provider.dao;
 
 import com.whut.dsbs.common.dto.Material;
-import com.zyb.mybatis.dao.BaseDao;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
  * Created by zyb on 2017-04-30.
  */
 @Mapper
-public interface MaterialDao extends BaseDao<Material, Integer> {
+public interface MaterialDao{
 
     List<Material> selectMaterialByPage();
 
@@ -23,4 +22,8 @@ public interface MaterialDao extends BaseDao<Material, Integer> {
     Material selectById(int id);
 
     boolean updateMaterialById(Material material);
+
+    List<Material> selectAll(Material material);
+
+    void deleteById(Material material, Integer id);
 }
