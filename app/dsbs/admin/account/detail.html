@@ -1,0 +1,70 @@
+<div ng-controller="AccountDetailController">
+    <div class="wrapper-md" >
+        <div class="panel panel-default">
+        <form class="form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-parse ng-valid-date-disabled" ng-submit="submit()">
+            <div class="panel-body" style="margin-top: 12px">
+              	<div class="row">
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label class="col-sm-4 control-label">用户姓名：</label>
+	                    <div class="col-sm-6">
+	                      <input type="text" class="form-control" ng-model="data.name">
+	                    </div>
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label class="col-sm-4 control-label">用户账号：</label>
+	                    <div class="col-sm-6">
+	                      <input type="text" class="form-control" ng-model="data.username">
+	                    </div>
+	                  </div>
+	                </div>
+              	</div>
+              	<div class="row">
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label class="col-sm-4 control-label">用户角色：</label>
+	                    <div class="col-sm-6">
+	                      <input type="text" class="form-control" ng-model="data.role.name" readonly>
+	                    </div>
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label class="col-sm-4 control-label">用户性别：</label>
+	                    <div class="col-sm-6">
+	                      <input type="text" class="form-control" ng-model="data.sex">
+	                    </div>
+	                  </div>
+	                </div>
+                </div>
+                <div class="row">
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label class="col-sm-4 control-label">电话号码：</label>
+	                    <div class="col-sm-6">
+	                      <input type="text" class="form-control" ng-model="data.telephone">
+	                    </div>
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label class="col-sm-4 control-label">电子邮箱：</label>
+	                    <div class="col-sm-6">
+	                      <input type="text" class="form-control" ng-model="data.email">
+	                    </div>
+	                  </div>
+	                </div>
+                </div>
+              	
+            </div>
+            
+        	<footer class="panel-footer text-right bg-light lter">
+                <input type="button" ng-click="cancel()" class="btn btn-danger pull-left" value="返回"/>
+                <input type="submit" class="btn btn-success" value="提交"/>
+            </footer>
+        </form>
+        </div>
+    </div>
+</div>

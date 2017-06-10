@@ -24,6 +24,10 @@
 
     <dubbo:service interface="com.whut.dsbs.common.service.BiddingService" ref="biddingService"/>
 
+    <dubbo:service interface="com.whut.dsbs.common.service.ActivitiService" ref="activitiService"/>
+
+    <dubbo:service interface="com.whut.dsbs.common.service.MaterialTypeService" ref="materialTypeService"/>
+
     <!--<dubbo:service interface="com.whut.dsbs.common.service.ActivitiService" ref="activitiService"/>-->
     <!--<bean id="activitiService" class="com.whut.dsbs.provider.service.impl.ActivitiServiceImpl"/>-->
 

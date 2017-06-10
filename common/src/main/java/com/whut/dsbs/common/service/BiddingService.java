@@ -1,6 +1,7 @@
 package com.whut.dsbs.common.service;
 
 import com.whut.dsbs.common.dto.Bidding;
+import com.whut.dsbs.common.dto.BiddingMaterial;
 
 import java.util.List;
 
@@ -11,6 +12,21 @@ import java.util.List;
  */
 public interface BiddingService extends BaseService<Bidding>{
 
-    List<Bidding> selectBiddingByRoleId(int roleId);
+    List<Bidding> selectBiddingByRoleId(int roleId, int page, String filter);
 
+    Bidding selectBiddingById(int id);
+
+    boolean completeProductSplit(List<BiddingMaterial> data, int roleId);
+
+    Bidding selectBiddingAndMaterialById(int id);
+
+    boolean completeConfirmQuantity(Bidding bidding);
+
+    Bidding selectDeterminePurchasePriceBidding(int id);
+
+    boolean completeDeterminePurchasePrice(Bidding bidding);
+
+    boolean completeDetermineCost(Bidding bidding);
+
+    Bidding selectResultBidding(int id);
 }

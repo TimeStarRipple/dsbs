@@ -2,7 +2,7 @@ package com.whut.dsbs.customer.controller;
 
 import com.whut.dsbs.common.dto.Material;
 import com.whut.dsbs.customer.constants.JsonResult;
-import com.whut.dsbs.customer.service.MaterialService;
+import com.whut.dsbs.common.service.MaterialService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,19 +18,21 @@ import java.util.List;
 public class MaterialController {
 
     @Resource
-    private MaterialService materialServiceImpl;
+    private MaterialService materialService;
 
     @RequestMapping(value = "/material/{id}", method = RequestMethod.GET)
     public JsonResult getMaterialById(@PathVariable("id")int id){
-        Material material = materialServiceImpl.getMaterialById(id);
-        return new JsonResult("200", "查询成功", material);
+        Material result = new Material();
+        result.setId(id);
+        result = materialService.select(result);
+        return new JsonResult("200", "查询成功", result);
     }
 
     @RequestMapping(value = "/material", method = RequestMethod.GET)
     public JsonResult getMaterialByPage(int page, String search){
         System.out.println(page + ":" + search);
 
-        List<Material> result = materialServiceImpl.getMaterialByPage(page, search);
+        List<Material> result = materialService.selectByPage(page, search);
 
         return new JsonResult("200", "查询成功", result);
     }
@@ -39,7 +41,7 @@ public class MaterialController {
     public JsonResult deleteMaterial(String ids){
         System.out.println(ids);
 
-        materialServiceImpl.deleteMaterialByIds(ids);
+        materialService.deleteBatch(ids);
 
         return new JsonResult("200", "批量删除成功", null);
     }
@@ -47,7 +49,9 @@ public class MaterialController {
     @RequestMapping(value = "/material/{id}", method = RequestMethod.DELETE)
     public JsonResult deleteMaterialById(@PathVariable("id")int id){
 
-        materialServiceImpl.deleteMaterialByIds(String.valueOf(id));
+        Material material = new Material();
+        material.setId(id);
+        materialService.delete(material);
 
         return new JsonResult("200", "删除成功", null);
     }
@@ -55,7 +59,7 @@ public class MaterialController {
     @RequestMapping(value = "/material/{id}", method = RequestMethod.PUT)
     public JsonResult updateMaterial(@RequestBody Material data){
         System.out.println(data);
-        materialServiceImpl.updateMaterial(data);
+        materialService.update(data);
         return new JsonResult("200", "更新成功", data);
     }
 
@@ -63,7 +67,7 @@ public class MaterialController {
     public JsonResult createMaterial(@RequestBody Material data){
         System.out.println(data);
 
-        Material result = materialServiceImpl.createMaterial(data);
+        Material result = materialService.insert(data);
 
         return new JsonResult("200", "创建成功", result);
     }

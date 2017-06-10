@@ -1,8 +1,9 @@
+
 app.controller('LoadingController',function($scope,$resource,$state,$localStorage){
     var $com = $resource($scope.app.host + "/user/login");
     $com.get(function(data){
         console.log(data);
-        $scope.session_user = $localStorage.user = data.object; //保存用户信息
+        $localStorage.user = data.object; //保存用户信息
         //保存菜单数据
         $scope.menu = data.object.role.permissions;
         $state.go('app.dashboard');
@@ -26,9 +27,9 @@ app.controller('LoginController',function($scope,$state,$http,$resource,Base64,$
         var $com = $resource($scope.app.host + "/user/login");
         $com.get(function(data){
             console.log(data);
-            $scope.session_user = $localStorage.user = data.object; //保存用户信息
+            $localStorage.user = data.object; //保存用户信息
+            // $scope.session_user = $localStorage.user;    
             $localStorage.auth = authdata;
-
             $state.go('app.dashboard');
         },function(data){
             console.log(data);

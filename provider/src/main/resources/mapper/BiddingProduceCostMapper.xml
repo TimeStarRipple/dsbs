@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whut.dsbs.provider.dao.BiddingProduceCostDao">
+    <resultMap id="biddingMaterialMap" type="com.whut.dsbs.common.dto.BiddingProduceCost">
+        <result column="id" property="id" />
+        <result column="bidding_id" property="biddingId" />
+        <result column="person_working_hours" property="personWorkingHours" />
+        <result column="staff_overtime_costs" property="staffOvertimeCosts" />
+        <result column="manage_service_charges" property="manageServiceCharges" />
+        <result column="tool_wear_costs" property="toolWearCosts" />
+        <result column="material_accessories_prices" property="materialAccessoriesPrices" />
+        <result column="sum_produce_prices" property="sumProducePrices" />
+    </resultMap>
+    
+    <insert id="insert" parameterType="com.whut.dsbs.common.dto.BiddingProduceCost">
+        INSERT into
+        dsbs_bidding_produce_cost(bidding_id, person_working_hours, staff_overtime_costs, manage_service_charges,
+        tool_wear_costs, material_accessories_prices, sum_produce_prices)
+        values
+        (#{biddingId}, #{personWorkingHours}, #{staffOvertimeCosts}, #{manageServiceCharges},
+        #{toolWearCosts}, #{materialAccessoriesPrices}, #{sumProducePrices})
+    </insert>
+
+    <select id="selectByBiddingId" resultMap="biddingMaterialMap">
+        select * from dsbs_bidding_produce_cost where bidding_id = #{biddingId};
+    </select>
+</mapper>

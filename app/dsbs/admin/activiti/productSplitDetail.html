@@ -1,0 +1,90 @@
+<div ng-controller="ProductSplitController">
+    <div class="wrapper-md" >
+        <div class="panel panel-default">
+        <form class="form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-parse ng-valid-date-disabled" ng-submit="submit()">
+            <div class="panel-body" style="margin-top: 12px">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">项目名称：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="bidding.projectName" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">截止日期：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="bidding.deadline" readonly date-format>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">创建人：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="bidding.username" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">创建时间：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="bidding.createTime" readonly date-format>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">项目描述</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" rows="6" ng-model="bidding.projectDescription" readonly></textarea>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body">
+        		<div>
+        			<div>产品材料信息</div>
+          			<table class="table table-striped table-hover">
+            			<thead>
+              				<tr>
+              					<th></th>
+              				</tr>
+            			</thead>
+            			<tbody>
+				            <tr ng-repeat="item in biddingMaterialList" class="row">
+				               	<td class="col-md-3" style="width:100%;">
+				               		<select ng-model="item.materialType" ng-options="(materialType.materialTypeCode+'-'+materialType.materialTypeName) for materialType in materialTypes"></select>
+				               	</td>
+				               	<td class="col-md-3" style="width:100%;">
+				               		<select ng-model="item.material" ng-options="(material.materialCode+'-'+material.materialName) for material in item.materialType.materials"></select>
+				               	</td>
+				               	<td class="col-md-3" style="width:100%;">
+				               		<input type="number" ng-model="item.neededNumber" placeholder="所需数量" required/>
+				               	</td>
+				               	<td class="col-md-3">
+					                <button type="button" class="btn btn-success btn-xs" ng-click="deleteFunc(item.optionIndex)">删除
+					                </button>
+				               	</td>
+				            </tr>
+				        </tbody>
+          			</table>
+        		</div>
+        		<a class="btn btn-success btn-xs" ng-click="add()">添加</a>
+      		</div>
+            <footer class="panel-footer text-right bg-light lter">
+                    <input type="button" ng-click="cancel()" class="btn btn-danger pull-left" value="取消"/>
+                      <input type="submit" class="btn btn-success" value="提交"/>
+             </footer>
+         </form>
+      </div>
+    </div>
+</div>

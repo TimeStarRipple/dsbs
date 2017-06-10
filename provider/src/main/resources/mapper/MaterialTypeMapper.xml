@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whut.dsbs.provider.dao.MaterialTypeDao">
+    <resultMap id="materialTypeMap" type="com.whut.dsbs.common.dto.MaterialType">
+        <result column="material_type_name" property="materialTypeName" />
+        <result column="material_type_code" property="materialTypeCode" />
+        <result column="material_table_name" property="materialTableName" />
+        <collection property="materials" ofType="com.whut.dsbs.common.dto.Material">
+            <result column="material_code" property="materialCode"/>
+            <result column="material_name" property="materialName"/>
+            <result column="material_type_code" property="materialTypeCode"/>
+            <result column="material_price" property="materialPrice"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectAll" resultMap="materialTypeMap">
+        select t.*, m.material_code, m.material_name, m.material_price
+        FROM
+            dsbs_material_type t
+        INNER JOIN
+            dsbs_material m ON t.material_type_code = m.material_type_code
+    </select>
+</mapper>

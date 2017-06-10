@@ -7,10 +7,7 @@ import com.whut.dsbs.customer.constants.JsonResult;
 import com.whut.dsbs.customer.utils.DecodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -81,6 +78,25 @@ public class UserController {
         result.setPassword(null);
 
         return new JsonResult("200", "登录成功", result);
+    }
+
+    @RequestMapping(value = "/index/{id}", method = RequestMethod.PUT)
+    public JsonResult updateUser(@RequestBody User data){
+        System.out.println(data);
+        userServiceImpl.update(data);
+        return new JsonResult("200", "更新成功", data);
+    }
+
+    @RequestMapping(value = "/index/{id}", method = RequestMethod.GET)
+    public JsonResult getUserById(@PathVariable("id")int id){
+        User result = userServiceImpl.selectById(id);
+        return new JsonResult("200", "查询成功", result);
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public JsonResult getUserByPage(int page, String search){
+        List<User> result = userServiceImpl.selectByPage(page, search);
+        return new JsonResult("200", "查询成功", result);
     }
 
 }

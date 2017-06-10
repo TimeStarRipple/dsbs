@@ -1,0 +1,50 @@
+<div ng-controller="ActivitiDetailController">
+    <div class="wrapper-md" >
+        <div class="panel panel-default">
+        <form class="form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-parse ng-valid-date-disabled" ng-submit="submit()">
+            <div class="panel-body" style="margin-top: 12px">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">项目名称</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="data.projectName" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">截止日期</label>
+                    <div class="col-sm-6">
+                      <input type="date" class="form-control" ng-model="data.deadline" required>
+                      <!-- <input type="text" class="form-control"  name="loanDate" datepicker-popup="{{format}}" ng-model="finance.loanDate" is-open="loanDate" datepicker-options="dateOptions close-text="Close" /> 
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openDatepicker($event,1)">
+                          <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                      </span> -->
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="line line-dashed b-b line-lg pull-in"></div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">项目描述</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" rows="6" ng-model="data.projectDescription"></textarea>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <footer class="panel-footer text-right bg-light lter">
+                    <input type="button" ng-click="delete()" ng-if="edit_mode" class="btn btn-danger pull-left" value="删除"/>
+                      <input type="submit" class="btn btn-success" value="提交"/>
+             </footer>
+         </form>
+      </div>
+    </div>
+</div>

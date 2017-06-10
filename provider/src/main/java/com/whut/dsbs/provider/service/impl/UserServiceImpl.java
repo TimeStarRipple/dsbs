@@ -1,5 +1,6 @@
 package com.whut.dsbs.provider.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.whut.dsbs.common.dto.Role;
 import com.whut.dsbs.common.dto.User;
 import com.whut.dsbs.common.service.UserService;
@@ -25,21 +26,31 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleDao roleDao;
 
-    @Override
     public List<User> selectAll() {
         return userDao.selectAll();
     }
 
-    @Override
+    public List<User> selectByPage(int i, String s) {
+        PageHelper.startPage(i, 10);
+        return userDao.selectAll();
+    }
+
     public User selectById(int i) {
         return userDao.selectById(i);
     }
 
-    @Override
     public User selectByUser(User user) {
         User result = userDao.selectByUser(user);
+        if(result == null){
+            return null;
+        }
         Role resultRole = roleDao.getRoleById(result.getRoleId());
         result.setRole(resultRole);
         return result;
+    }
+
+    public User update(User user) {
+        userDao.update(user);
+        return user;
     }
 }

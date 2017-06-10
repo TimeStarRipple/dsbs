@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whut.dsbs.provider.dao.BiddingMaterialDao">
+    <resultMap id="biddingMaterialMap" type="com.whut.dsbs.common.dto.BiddingMaterial">
+        <result column="bidding_id" property="biddingId" />
+        <result column="material_code" property="materialCode" />
+        <result column="material_name" property="materialName" />
+        <result column="needed_number" property="neededNumber" />
+        <result column="cost_price" property="costPrice" />
+        <result column="buy_number" property="buyNumber" />
+        <result column="buy_price" property="buyPrice" />
+        <result column="material_type_code" property="materialTypeCode" />
+        <result column="material_type_name" property="materialTypeName" />
+        <result column="is_enough" property="isEnough" />
+        <result column="material_number" property="sumNumber" />
+    </resultMap>
+
+    <select id="selectAllByBiddingId" resultMap="biddingMaterialMap">
+        SELECT bm.*, m.material_number
+        FROM
+          dsbs_bidding_material bm
+        INNER JOIN
+          dsbs_material m ON bm.material_code = m.material_code
+        WHERE
+          bidding_id = #{biddingId}
+    </select>
+    
+    <insert id="insert" parameterType="com.whut.dsbs.common.dto.BiddingMaterial">
+        INSERT into
+        dsbs_bidding_material(bidding_id, material_code, needed_number, cost_price, buy_number, buy_price,
+        material_type_code, is_enough, material_name, material_type_name)
+        values
+        (#{biddingId}, #{materialCode}, #{neededNumber}, #{costPrice}, #{buyNumber}, #{buyPrice}, #{materialTypeCode},
+        #{isEnough}, #{materialName}, #{materialTypeName})
+    </insert>
+    
+    <update id="update" parameterType="com.whut.dsbs.common.dto.BiddingMaterial">
+        UPDATE
+        dsbs_bidding_material
+        SET
+        needed_number = #{neededNumber},
+        cost_price = #{costPrice},
+        buy_number = #{buyNumber},
+        buy_price = #{buyPrice},
+        material_type_code = #{materialTypeCode},
+        is_enough = #{isEnough},
+        material_name = #{materialName},
+        material_type_name = #{materialTypeName}
+        WHERE
+        bidding_id = #{biddingId} AND material_code = #{materialCode}
+    </update>
+    <select id="selectIsNotEnoughMaterial" resultMap="biddingMaterialMap">
+        SELECT * FROM dsbs_bidding_material WHERE bidding_id = #{biddingId}
+        AND is_enough = 1
+    </select>
+</mapper>

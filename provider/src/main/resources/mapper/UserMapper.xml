@@ -19,24 +19,45 @@
     </resultMap>
 
     <sql id="baseColumnList">
-        id, username, password, role_id, status, sex, telephone, email, name
+        u.id, u.username, u.password, u.role_id, u.status, u.sex, u.telephone, u.email, u.name u_name,
+        r.name r_name, r.type
     </sql>
 
     <select id="selectById" resultMap="userMap">
         select
         <include refid="baseColumnList" />
-        from dsbs_user
-        where id = #{id}
+        from dsbs_user u inner join dsbs_role r on u.role_id = r.id
+        where u.id = #{id}
     </select>
 
     <select id="selectByUser" resultMap="userMap">
         select
-        u.id, u.username, u.password, u.role_id, u.status, u.sex, u.telephone, u.email, u.name u_name,
-        r.name r_name, r.type
+        <include refid="baseColumnList" />
         from dsbs_user u inner join dsbs_role r on u.role_id = r.id
         where
         username = #{username}
         and
         password = #{password}
     </select>
+
+    <select id="selectAll" resultMap="userMap">
+        select
+        <include refid="baseColumnList" />
+        from dsbs_user u inner join dsbs_role r on u.role_id = r.id
+    </select>
+
+    <update id="update" parameterType="com.whut.dsbs.common.dto.User">
+        UPDATE
+        dsbs_user
+        set
+        username = #{username},
+        role_id = #{roleId},
+        status = #{status},
+        sex = #{sex},
+        telephone = #{telephone},
+        email = #{email},
+        name = #{name}
+        WHERE
+        id=#{id}
+    </update>
 </mapper>

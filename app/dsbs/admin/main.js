@@ -67,7 +67,7 @@ angular.module('app')
       };
 
       //保存用户信息
-      $scope.session_user = $localStorage.user;
+      //$scope.session_user = $localStorage.user;
 
       $scope.logout = function(){
         $localStorage.auth = null;

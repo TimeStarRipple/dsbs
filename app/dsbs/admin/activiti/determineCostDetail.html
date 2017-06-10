@@ -1,0 +1,130 @@
+<div ng-controller="DetermineCostController">
+    <div class="wrapper-md" >
+        <div class="panel panel-default">
+        <form class="form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-parse ng-valid-date-disabled" ng-submit="submit()">
+            <div class="panel-body" style="margin-top: 12px">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">项目名称：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="bidding.projectName" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">截止日期：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="bidding.deadline" readonly date-format>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">创建人：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="bidding.username" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">创建时间：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="bidding.createTime" readonly date-format>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">项目描述</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" rows="6" ng-model="bidding.projectDescription" readonly></textarea>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body">
+        		<div>
+        			<div>产品材料信息</div>
+          			<table class="table table-striped table-hover">
+          				<thead>
+              				<tr>
+              					<th>材料类型</th>
+              					<th>材料实体</th>
+              					<th>材料数量</th>
+              				</tr>
+            			</thead>
+            			<tbody>
+          					<tr ng-repeat="data in biddingMaterials">
+          						<td>{{data.materialTypeCode}}-{{data.materialTypeName}}</td>
+            					<td>{{data.materialCode}}-{{data.materialName}}</td>
+            					<td>{{data.neededNumber}}</td>
+          					</tr>
+          				</tbody>
+          			</table>
+        		</div>
+        	</div>
+        	<div class="panel-body">
+        		<div class="line line-dashed b-b line-lg pull-in"></div>
+        		<div class="row">
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label class="col-sm-4 control-label">人员工时费用：</label>
+	                    <div class="col-sm-6">
+	                      <input type="number" class="form-control" ng-model="bidding.biddingProduceCost.personWorkingHours">
+	                    </div>
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label class="col-sm-4 control-label">人员加班费用：</label>
+	                    <div class="col-sm-6">
+	                      <input type="number" class="form-control" ng-model="bidding.biddingProduceCost.staffOvertimeCosts">
+	                    </div>
+	                  </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label class="col-sm-4 control-label">管理服务费用：</label>
+	                    <div class="col-sm-6">
+	                      <input type="number" class="form-control" ng-model="bidding.biddingProduceCost.manageServiceCharges">
+	                    </div>
+	                  </div>
+	                </div>
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label class="col-sm-4 control-label">工具磨损成本：</label>
+	                    <div class="col-sm-6">
+	                      <input type="number" class="form-control" ng-model="bidding.biddingProduceCost.toolWearCosts">
+	                    </div>
+	                  </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="col-sm-6">
+	                  <div class="form-group">
+	                    <label class="col-sm-4 control-label">材料配件价格：</label>
+	                    <div class="col-sm-6">
+	                      <input type="number" class="form-control" ng-model="bidding.biddingProduceCost.materialAccessoriesPrices">
+	                    </div>
+	                  </div>
+	                </div>
+	            </div>
+        	</div>
+        	<footer class="panel-footer text-right bg-light lter">
+                <input type="button" ng-click="cancel()" class="btn btn-danger pull-left" value="返回"/>
+                <input type="submit" class="btn btn-success" value="提交"/>
+            </footer>
+        </form>
+        </div>
+    </div>
+</div>

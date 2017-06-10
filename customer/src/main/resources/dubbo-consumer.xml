@@ -19,5 +19,7 @@
     
     <dubbo:reference id="userService" interface="com.whut.dsbs.common.service.UserService"/>
     <dubbo:reference id="materialService" interface="com.whut.dsbs.common.service.MaterialService"/>
-
+    <dubbo:reference id="activitiService" interface="com.whut.dsbs.common.service.ActivitiService"/>
+    <dubbo:reference id="biddingService" interface="com.whut.dsbs.common.service.BiddingService"/>
+    <dubbo:reference id="materialTypeService" interface="com.whut.dsbs.common.service.MaterialTypeService"/>
 </beans>

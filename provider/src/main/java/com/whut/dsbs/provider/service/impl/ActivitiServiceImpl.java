@@ -1,5 +1,6 @@
 package com.whut.dsbs.provider.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.whut.dsbs.common.dto.Bidding;
 import com.whut.dsbs.common.service.ActivitiService;
 import org.activiti.engine.RuntimeService;
@@ -47,7 +48,10 @@ public class ActivitiServiceImpl implements ActivitiService{
         return processInstance.getProcessInstanceId();
     }
 
-    public List<Bidding> findRoleCurrentTask(int i) {
+    public List<Bidding> findRoleCurrentTask(int i, int page, String filter) {
+
+        PageHelper.startPage(page, 10);
+
         List<Task> tasks = taskService
                 .createTaskQuery()
                 .taskAssignee(String.valueOf(i))
@@ -91,5 +95,22 @@ public class ActivitiServiceImpl implements ActivitiService{
         }
         return true;
 
+    }
+
+    public Bidding selectTaskByBidding(Bidding bidding) {
+        List<Task> tasks = taskService
+                .createTaskQuery()
+                .taskAssignee(String.valueOf(bidding.getAssigneeRoleId()))
+                .processInstanceId(bidding.getProcessInstanceId())
+                .list();
+        if (tasks == null || tasks.size() == 0 || tasks.size() > 1) {
+            System.out.println("tasks.size()有问题");
+        }
+        else{
+            Task task = tasks.get(0);
+            bidding.setTaskId(task.getId());
+            bidding.setTaskName(task.getName());
+        }
+        return bidding;
     }
 }

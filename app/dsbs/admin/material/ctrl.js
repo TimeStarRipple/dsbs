@@ -1,7 +1,7 @@
 
 'use strict';
 
-app.controller('ListController', function($scope, $resource,$stateParams,$modal,$state) {
+app.controller('MaterialListController', function($scope, $resource,$stateParams,$modal,$state) {
     //查询
     $scope.query = function(page,filter){
 
@@ -13,9 +13,14 @@ app.controller('ListController', function($scope, $resource,$stateParams,$modal,
         }
         $com.get({page:page,filter:filter},function(data){
             console.log(data);
-
+            data.total = 10;
             //计算页面数，默认每页10条记录
-            data.page_count = data.total / 10 + 1;
+            if(data.total / 10 * 10 == data.total){
+              data.page_count = data.total / 10;
+            }
+            else{
+              data.page_count = data.total / 10 + 1;
+            }
 
             //扩展分页数据，显示页签，最终效果为  < 1 2 3 4 5 >
             data.page_index = page;
@@ -82,7 +87,7 @@ app.controller('ConfirmController', ['$scope', '$modalInstance', function($scope
   };
 }]);
 
-app.controller('DetailController', function($rootScope,$scope, $resource, $stateParams,$state) {
+app.controller('MaterialDetailController', function($rootScope,$scope, $resource, $stateParams,$state) {
   $scope.edit_mode = !!$stateParams.id;
   if($scope.edit_mode){
       var $com = $resource($scope.app.host + "/material/:id/?",{id:'@id'});

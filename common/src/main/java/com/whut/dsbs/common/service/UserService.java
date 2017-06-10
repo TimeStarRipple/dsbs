@@ -13,6 +13,8 @@ public interface UserService {
 
     List<User> selectAll();
 
+    List<User> selectByPage(int page, String filter);
+
     User selectById(int id);
 
     /**
@@ -21,4 +23,6 @@ public interface UserService {
      * @return
      */
     User selectByUser(User user);
+
+    User update(User user);
 }

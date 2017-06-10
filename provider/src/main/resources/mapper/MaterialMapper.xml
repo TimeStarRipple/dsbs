@@ -8,10 +8,17 @@
         <result column="material_quoted_price" property="materialQuotedPrice" />
         <result column="material_price" property="materialPrice" />
         <result column="material_number" property="materialNumber" />
+        <result column="material_code" property="materialCode" />
+        <result column="material_type_name" property="materialTypeName" />
+        <result column="material_type_code" property="materialTypeCode" />
     </resultMap>
 
     <select id="selectMaterialByPage" resultMap="materialMap">
-        select * from dsbs_material
+        select m.*, t.material_type_name
+        from
+        dsbs_material m
+        inner join dsbs_material_type t
+        on t.material_type_code = m.material_type_code
     </select>
 
     <delete id="deleteByIdList" parameterType="java.util.List">

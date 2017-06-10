@@ -13,19 +13,47 @@
         <result column="assignee_role_id" property="assigneeRoleId" />
         <result column="assignee_department" property="assigneeDepartment" />
         <result column="task_name" property="taskName" />
-        <result column="condition" property="condition" />
+        <result column="bidding_condition" property="condition" />
+        <result column="deadline" property="deadline" />
+        <result column="cost_sum_price" property="costSumPrice" />
+        <result column="purchase_sum_price" property="purchaseSumPrice" />
+        <result column="sum_price" property="sumPrice" />
     </resultMap>
 
     <insert id="insert" parameterType="com.whut.dsbs.common.dto.Bidding">
         insert into
         dsbs_bidding(project_name, create_time, user_id, username, project_description,
-        task_id, process_instance_id, assignee_role_id, assignee_department, task_name, condition)
+        task_id, process_instance_id, assignee_role_id, assignee_department, task_name, bidding_condition, deadline)
         VALUES
         (#{projectName}, #{createTime}, #{userId}, #{username}, #{projectDescription},
-        #{taskId}, #{processInstanceId}, #{assigneeRoleId}, #{assigneeDepartment}, #{taskName}, #{condition})
+        #{taskId}, #{processInstanceId}, #{assigneeRoleId}, #{assigneeDepartment}, #{taskName}, #{condition}, #{deadline})
     </insert>
+
+    <update id="update" parameterType="com.whut.dsbs.common.dto.Bidding">
+        UPDATE
+        dsbs_bidding
+        set
+        project_name = #{projectName},
+        project_description = #{projectDescription},
+        task_id = #{taskId},
+        process_instance_id = #{processInstanceId},
+        assignee_role_id = #{assigneeRoleId},
+        assignee_department = #{assigneeDepartment},
+        task_name = #{taskName},
+        bidding_condition = #{condition},
+        deadline = #{deadline},
+        cost_sum_price = #{costSumPrice},
+        purchase_sum_price = #{purchaseSumPrice},
+        sum_price = #{sumPrice}
+        WHERE
+        id=#{id}
+    </update>
 
     <select id="selectByRoleId" resultMap="biddingMap">
         select * from dsbs_bidding where assignee_role_id = #{roleId}
+    </select>
+
+    <select id="selectById" resultMap="biddingMap">
+        select * from dsbs_bidding where id = #{id}
     </select>
 </mapper>

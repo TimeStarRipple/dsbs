@@ -1,4 +1,4 @@
-<div class="wrapper-md" ng-controller="ListController">
+<div class="wrapper-md" ng-controller="MaterialListController">
   <div class="panel panel-default">
     <div class="panel-heading">
     <ul class="nav nav-pills pull-right">
@@ -34,8 +34,10 @@
                 <input type="checkbox" ng-click="selectAll()"><i></i>
               </label>
             </th>
-            <th>标题</th>
-            <th>创建时间</th>
+            <th>材料名称</th>
+            <th>材料编码</th>
+            <th>材料数量</th>
+            <th>材料价格</th>
             <th style="width:30px;"></th>
           </tr>
         </thead>
@@ -43,8 +45,10 @@
           <tr ng-repeat="data in data.object">
             <td><label class="i-checks m-b-none"><input type="checkbox" ng-model="data.selected"><i></i></label></td>
             <td>{{data.materialName}}</td>
+            <td>{{data.materialCode}}</td>
             <!-- <td>{{data.create_time|date:'yyyy-MM-dd HH:mm:ss Z'}}</td> -->
             <td>{{data.materialNumber}}</td>
+            <td>{{data.materialPrice}}</td>
             <td>
               <a ui-sref="app.material.detail({id:data.id})" class="active"><i class="fa fa-edit"></i></a>
             </td>

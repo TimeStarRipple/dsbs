@@ -13,7 +13,11 @@ import java.util.List;
  */
 @Mapper
 public interface BiddingDao {
-    Bidding insert(Bidding bidding);
+    int insert(Bidding bidding);
 
     List<Bidding> selectByRoleId(@Param("roleId")int roleId);
+
+    int update(Bidding bidding);
+
+    Bidding selectById(@Param("id")int id);
 }

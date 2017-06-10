@@ -22,10 +22,13 @@ public class Material implements Serializable{
 
     private Double materialPrice;
 
-    private Double materialNumber;
+    private Integer materialNumber;
 
     //材料类型id
-    private int materialTypeId;
+    private String materialTypeCode;
+
+    //材料类型id
+    private String materialTypeName;
 
     //最后一次数据更新时间
     private Date lastUpdateTime;
@@ -39,7 +42,7 @@ public class Material implements Serializable{
     public Material() {
     }
 
-    public Material(Integer id, String materialCode, String materialName, String materialDescription, Double materialQuotedPrice, Double materialPrice, Double materialNumber, int materialTypeId, Date lastUpdateTime, MaterialType materialType, Object materialAttribute) {
+    public Material(Integer id, String materialCode, String materialName, String materialDescription, Double materialQuotedPrice, Double materialPrice, Integer materialNumber, String materialTypeCode, String materialTypeName, Date lastUpdateTime, MaterialType materialType, Object materialAttribute) {
         this.id = id;
         this.materialCode = materialCode;
         this.materialName = materialName;
@@ -47,7 +50,8 @@ public class Material implements Serializable{
         this.materialQuotedPrice = materialQuotedPrice;
         this.materialPrice = materialPrice;
         this.materialNumber = materialNumber;
-        this.materialTypeId = materialTypeId;
+        this.materialTypeCode = materialTypeCode;
+        this.materialTypeName = materialTypeName;
         this.lastUpdateTime = lastUpdateTime;
         this.materialType = materialType;
         this.materialAttribute = materialAttribute;
@@ -93,11 +97,11 @@ public class Material implements Serializable{
         this.materialPrice = materialPrice;
     }
 
-    public Double getMaterialNumber() {
+    public Integer getMaterialNumber() {
         return materialNumber;
     }
 
-    public void setMaterialNumber(Double materialNumber) {
+    public void setMaterialNumber(Integer materialNumber) {
         this.materialNumber = materialNumber;
     }
 
@@ -109,12 +113,12 @@ public class Material implements Serializable{
         this.materialCode = materialCode;
     }
 
-    public int getMaterialTypeId() {
-        return materialTypeId;
+    public String getMaterialTypeCode() {
+        return materialTypeCode;
     }
 
-    public void setMaterialTypeId(int materialTypeId) {
-        this.materialTypeId = materialTypeId;
+    public void setMaterialTypeCode(String materialTypeCode) {
+        this.materialTypeCode = materialTypeCode;
     }
 
     public Date getLastUpdateTime() {
@@ -141,6 +145,14 @@ public class Material implements Serializable{
         this.materialAttribute = materialAttribute;
     }
 
+    public String getMaterialTypeName() {
+        return materialTypeName;
+    }
+
+    public void setMaterialTypeName(String materialTypeName) {
+        this.materialTypeName = materialTypeName;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Material{");
@@ -151,7 +163,8 @@ public class Material implements Serializable{
         sb.append(", materialQuotedPrice=").append(materialQuotedPrice);
         sb.append(", materialPrice=").append(materialPrice);
         sb.append(", materialNumber=").append(materialNumber);
-        sb.append(", materialTypeId=").append(materialTypeId);
+        sb.append(", materialTypeCode='").append(materialTypeCode).append('\'');
+        sb.append(", materialTypeName='").append(materialTypeName).append('\'');
         sb.append(", lastUpdateTime=").append(lastUpdateTime);
         sb.append(", materialType=").append(materialType);
         sb.append(", materialAttribute=").append(materialAttribute);

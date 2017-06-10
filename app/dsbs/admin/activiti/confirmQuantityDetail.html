@@ -1,0 +1,73 @@
+<div ng-controller="ConfirmQuantityController">
+    <div class="wrapper-md" >
+        <div class="panel panel-default">
+        <form class="form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-parse ng-valid-date-disabled" ng-submit="submit()">
+            <div class="panel-body" style="margin-top: 12px">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">项目名称：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="bidding.projectName" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">截止日期：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="bidding.deadline" readonly date-format>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">创建人：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="bidding.username" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">创建时间：</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" ng-model="bidding.createTime" readonly date-format>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body">
+        		<div>
+        			<div>产品材料信息</div>
+          			<table class="table table-striped table-hover">
+          				<thead>
+              				<tr>
+              					<th>材料类型</th>
+              					<th>材料实体</th>
+              					<th>所需数量</th>
+                        <th>现有数量</th>
+              				</tr>
+            			</thead>
+            			<tbody>
+          					<tr ng-repeat="data in biddingMaterials">
+          						<td>{{data.materialTypeCode}}-{{data.materialTypeName}}</td>
+            					<td>{{data.materialCode}}-{{data.materialName}}</td>
+            					<td>{{data.neededNumber}}</td>
+                      <td>{{data.sumNumber}}</td>
+          					</tr>
+          				</tbody>
+          			</table>
+        		</div>
+        	</div>
+        	<footer class="panel-footer text-right bg-light lter">
+                <input type="button" ng-click="cancel()" class="btn btn-danger pull-left" value="不够"/>
+                <input type="submit" class="btn btn-success" value="足够"/>
+            </footer>
+        </form>
+        </div>
+    </div>
+</div>

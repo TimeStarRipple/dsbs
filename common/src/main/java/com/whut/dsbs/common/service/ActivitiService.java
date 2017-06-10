@@ -13,7 +13,9 @@ public interface ActivitiService {
 
     String startProcessInstance(int userId);
 
-    List<Bidding> findRoleCurrentTask(int roleId);
+    List<Bidding> findRoleCurrentTask(int roleId, int page, String filter);
 
     boolean completeTask(Bidding bidding);
+
+    Bidding selectTaskByBidding(Bidding bidding);
 }
